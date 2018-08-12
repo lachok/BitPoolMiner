@@ -18,7 +18,7 @@ namespace BitPoolMiner.Miners
     public class EWBF : Miner
     {
 
-        public EWBF(HardwareType hardwareType, MinerBaseType minerBaseType) : base("EWBF", hardwareType, minerBaseType)
+        public EWBF(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor) : base("EWBF", hardwareType, minerBaseType, hardwareMonitor)
         {
             MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "EWBF");
             MinerFileName = "miner.exe";

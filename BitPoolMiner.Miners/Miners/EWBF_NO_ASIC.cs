@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using System.Windows;
 using System.IO;
 using BitPoolMiner.Enums;
 using BitPoolMiner.Utils;
@@ -18,7 +17,7 @@ namespace BitPoolMiner.Miners
     public class EWBF_NO_ASIC : Miner
     {
 
-        public EWBF_NO_ASIC(HardwareType hardwareType, MinerBaseType minerBaseType) : base("EWBF_NO_ASIC", hardwareType, minerBaseType)
+        public EWBF_NO_ASIC(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor) : base("EWBF_NO_ASIC", hardwareType, minerBaseType, hardwareMonitor)
         {
             MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "EWBF_NO_ASIC");
             MinerFileName = "miner.exe";

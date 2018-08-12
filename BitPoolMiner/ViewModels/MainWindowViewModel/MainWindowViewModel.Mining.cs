@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using BitPoolMiner.Utils.OpenHardwareMonitor;
 using Timer = System.Timers.Timer;
 
 namespace BitPoolMiner.ViewModels
@@ -142,10 +143,11 @@ namespace BitPoolMiner.ViewModels
             List<MinerConfigResponse> minerConfigResponseList = GetMinerConfigurations();
 
             // Iterate through returned responses from API and initialize miners
+            var minerFactory = new MinerFactory(new WindowsHardwareMonitor());
             foreach (MinerConfigResponse minerConfigResponse in minerConfigResponseList)
             {
                 // Create miner session
-                Miner miner = MinerFactory.CreateMiner(minerConfigResponse.MinerBaseType, minerConfigResponse.HardwareType);
+                var miner = minerFactory.CreateMiner(minerConfigResponse.MinerBaseType, minerConfigResponse.HardwareType);
                 miner.CoinType = minerConfigResponse.CoinSelectedForMining;
                 miner.MinerArguments = minerConfigResponse.MinerConfigString;
                 MiningSession.AddMiner(miner);

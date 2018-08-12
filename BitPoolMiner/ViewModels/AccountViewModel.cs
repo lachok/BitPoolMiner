@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using BitPoolMiner.Miners;
 
 namespace BitPoolMiner.ViewModels
 {
@@ -537,13 +538,13 @@ namespace BitPoolMiner.ViewModels
         /// <param name="param"></param>
         private void ScanHardware(object param)
         {
-
+            
             var accountId = (Guid)Application.Current.Properties["AccountID"];
             var workerName = Application.Current.Properties["WorkerName"].ToString();
 
             // Scan for hardware using Open Harware Monitor
-            Utils.OpenHardwareMonitor.OpenHardwareMonitor openHardwareMonitor = new Utils.OpenHardwareMonitor.OpenHardwareMonitor();
-            GPUSettingsList = openHardwareMonitor.ScanHardware(accountId, workerName);
+            HardwareMonitor hardwareMonitor = new Utils.OpenHardwareMonitor.WindowsHardwareMonitor();
+            GPUSettingsList = hardwareMonitor.ScanHardware(accountId, workerName);
 
             // Push GPU settings to the API
             PersistWorkerHardware(null);

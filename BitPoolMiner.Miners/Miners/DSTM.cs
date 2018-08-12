@@ -17,7 +17,7 @@ namespace BitPoolMiner.Miners
     /// </summary>
     public class DSTM : Miner
     {
-        public DSTM(HardwareType hardwareType, MinerBaseType minerBaseType) : base("DSTM", hardwareType, minerBaseType)
+        public DSTM(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor) : base("DSTM", hardwareType, minerBaseType, hardwareMonitor)
         {
             MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "DSTM");
             MinerFileName = "zm.exe";

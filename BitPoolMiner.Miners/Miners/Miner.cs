@@ -35,14 +35,17 @@ namespace BitPoolMiner.Miners
         public HardwareType Hardware { get; protected set; }
         public MinerBaseType MinerBaseType { get; protected set; }
 
+        protected HardwareMonitor HardwareMonitor { get; }
+
         public bool IsMining { get; protected set; }
 
-        protected Miner(string minerName, HardwareType hardwareType, MinerBaseType minerBaseType, bool is64Bit = true)
+        protected Miner(string minerName, HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor, bool is64Bit = true)
         {
             MinerName = minerName;
             Is64Bit = is64Bit;
             Hardware = hardwareType;
             MinerBaseType = minerBaseType;
+            HardwareMonitor = hardwareMonitor;
             IsMining = false;
         }
 
@@ -125,8 +128,7 @@ namespace BitPoolMiner.Miners
                 try
                 {
                     // Retrive GPU data from OpenHardwareMonitor
-                    Utils.OpenHardwareMonitor.OpenHardwareMonitor openHardwareMonitor = new Utils.OpenHardwareMonitor.OpenHardwareMonitor();
-                    ObservableCollection<GPUSettings> gpuSettingsList = openHardwareMonitor.ScanHardware(accountId, workerName);
+                    ObservableCollection<GPUSettings> gpuSettingsList = HardwareMonitor.ScanHardware(accountId, workerName);
 
                     // Iterate through each GPUMonitorStat and add missing data
                     foreach (GPUMonitorStat gpuMonitorStat in stats.GPUMonitorStatList)

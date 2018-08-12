@@ -3,10 +3,11 @@ using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using BitPoolMiner.Miners;
 
 namespace BitPoolMiner.Utils.OpenHardwareMonitor
 {
-    public class OpenHardwareMonitor
+    public class WindowsHardwareMonitor : HardwareMonitor
     {
         public ObservableCollection<GPUSettings> ScanHardware(Guid accountId, string workerName)
         {

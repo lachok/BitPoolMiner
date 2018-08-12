@@ -22,7 +22,7 @@ namespace BitPoolMiner.Miners
         public string MinerConfigArguments { get; private set; }
         public string MinerConfigFileName { get; private set; }
 
-        public LyclMiner(HardwareType hardwareType, MinerBaseType minerBaseType, bool is64Bit) : base("LyclMiner", hardwareType, minerBaseType, is64Bit)
+        public LyclMiner(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor, bool is64Bit) : base("LyclMiner", hardwareType, minerBaseType, hardwareMonitor, is64Bit)
         {
             MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "LyclMiner015");
             MinerFileName = "lyclMiner.exe";

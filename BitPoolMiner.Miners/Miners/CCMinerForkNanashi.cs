@@ -8,7 +8,7 @@ namespace BitPoolMiner.Miners
     /// </summary>
     public class CCMinerForkNanashi : Ccminer
     {
-        public CCMinerForkNanashi(HardwareType hardwareType, MinerBaseType minerBaseType) : base(hardwareType, minerBaseType, false)
+        public CCMinerForkNanashi(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor) : base(hardwareType, minerBaseType, hardwareMonitor, false)
         {
             string versionedDirectory = "";
             MinerFileName = "ccminer.exe";

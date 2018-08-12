@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using BitPoolMiner.Linux;
 
 namespace BitPoolMiner.Console
 {
@@ -74,12 +75,13 @@ _  /_/ /_  / / /_ _  ____// /_/ / /_/ /  / _  /  / / _  / _  / / /  __/  /
 
             // Call API and retrieve a list of miner configurations used to start mining
             List<MinerConfigResponse> minerConfigResponseList = GetMinerConfigurations(minerAccount);
-
+            var hardwareMonitor = new LinuxHardwareMonitor();
+            var minerFactory = new MinerFactory(hardwareMonitor);
             // Iterate through returned responses from API and initialize miners
             foreach (MinerConfigResponse minerConfigResponse in minerConfigResponseList)
             {
                 // Create miner session
-                Miner miner = MinerFactory.CreateMiner(minerConfigResponse.MinerBaseType, minerConfigResponse.HardwareType);
+                var miner = minerFactory.CreateMiner(minerConfigResponse.MinerBaseType, minerConfigResponse.HardwareType);
                 miner.CoinType = minerConfigResponse.CoinSelectedForMining;
                 miner.MinerArguments = minerConfigResponse.MinerConfigString;
                 miningSession.AddMiner(miner);

@@ -18,7 +18,8 @@ namespace BitPoolMiner.Miners
     /// </summary>
     public class Ccminer : Miner
     {
-        public Ccminer(HardwareType hardwareType, MinerBaseType minerBaseType, bool is64Bit) : base("Ccminer", hardwareType, minerBaseType, is64Bit)
+        public Ccminer(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor,
+            bool is64Bit) : base("Ccminer", hardwareType, minerBaseType, hardwareMonitor, is64Bit)
         {
             string versionedDirectory = "";
             if (is64Bit)

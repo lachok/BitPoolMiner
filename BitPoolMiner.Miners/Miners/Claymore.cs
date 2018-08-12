@@ -18,7 +18,7 @@ namespace BitPoolMiner.Miners
     /// </summary>
     public class Claymore : Miner
     {
-        public Claymore(HardwareType hardwareType, MinerBaseType minerBaseType) : base("Claymore", hardwareType, minerBaseType)
+        public Claymore(HardwareType hardwareType, MinerBaseType minerBaseType, HardwareMonitor hardwareMonitor) : base("Claymore", hardwareType, minerBaseType, hardwareMonitor)
         {
             MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "Claymore");
             MinerFileName = "EthDcrMiner64.exe";
