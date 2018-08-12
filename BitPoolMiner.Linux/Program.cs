@@ -5,6 +5,7 @@ using System.Linq;
 using BitPoolMiner.Enums;
 using BitPoolMiner.Miners;
 using BitPoolMiner.Models;
+using BitPoolMiner.Utils;
 using BitPoolMiner.Persistence.API;
 using BitPoolMiner.Persistence.FileSystem;
 
@@ -61,6 +62,9 @@ _  /_/ /_  / / /_ _  ____// /_/ / /_/ /  / _  /  / / _  / _  / / /  __/  /
         static void Main(string[] args)
         {
             System.Console.WriteLine(BANNER);
+
+            Console.WriteLine($@"BPM home directory: {Core.GetBPMBaseUserDirectory()}");
+            Console.WriteLine($@"BPM miners directory: {Core.GetBaseMinersDir()}");
             var minerAccount = MinerAccount.Init();
             var miningSession = new MiningSession();
 
