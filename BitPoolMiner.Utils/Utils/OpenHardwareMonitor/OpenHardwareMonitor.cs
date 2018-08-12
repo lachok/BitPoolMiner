@@ -1,12 +1,8 @@
 ﻿using BitPoolMiner.Models;
 using OpenHardwareMonitor.Hardware;
-using OpenHardwareMonitor.Hardware.ATI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace BitPoolMiner.Utils.OpenHardwareMonitor
 {
