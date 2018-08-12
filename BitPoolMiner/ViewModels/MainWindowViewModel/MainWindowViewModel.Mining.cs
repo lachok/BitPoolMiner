@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using BitPoolMiner.Utils.OpenHardwareMonitor;
+using BitPoolMiner.Utils.HardwareMonitor;
 using Timer = System.Timers.Timer;
 
 namespace BitPoolMiner.ViewModels

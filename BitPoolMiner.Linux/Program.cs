@@ -1,15 +1,14 @@
-﻿using BitPoolMiner.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using BitPoolMiner.Enums;
 using BitPoolMiner.Miners;
 using BitPoolMiner.Models;
 using BitPoolMiner.Persistence.API;
 using BitPoolMiner.Persistence.FileSystem;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using BitPoolMiner.Linux;
 
-namespace BitPoolMiner.Console
+namespace BitPoolMiner.Linux
 {
 
     class MinerAccount

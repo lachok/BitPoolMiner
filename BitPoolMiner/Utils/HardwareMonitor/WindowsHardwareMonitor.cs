@@ -1,13 +1,12 @@
-﻿using BitPoolMiner.Models;
-using OpenHardwareMonitor.Hardware;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using BitPoolMiner.Miners;
+using BitPoolMiner.Models;
+using OpenHardwareMonitor.Hardware;
 
-namespace BitPoolMiner.Utils.OpenHardwareMonitor
+namespace BitPoolMiner.Utils.HardwareMonitor
 {
-    public class WindowsHardwareMonitor : HardwareMonitor
+    public class WindowsHardwareMonitor : Miners.HardwareMonitor
     {
         public ObservableCollection<GPUSettings> ScanHardware(Guid accountId, string workerName)
         {
