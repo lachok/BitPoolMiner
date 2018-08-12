@@ -9,12 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BitPoolMiner.Models\BitPoolMiner.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BitPoolMiner.Persistence\BitPoolMiner.Persistence.csproj" />
-    <ProjectReference Include="..\BitPoolMiner.Utils\BitPoolMiner.Utils.csproj" />
   </ItemGroup>
 
 </Project>

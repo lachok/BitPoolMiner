@@ -1,4 +1,5 @@
-﻿using BitPoolMiner.Enums;
+﻿using System;
+using BitPoolMiner.Enums;
 using BitPoolMiner.Miners;
 using BitPoolMiner.Models;
 using BitPoolMiner.Persistence.API;
