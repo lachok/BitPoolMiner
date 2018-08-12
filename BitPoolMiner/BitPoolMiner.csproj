@@ -161,6 +161,7 @@
     <Compile Include="Utils\FeatureTour\Tours\TourMineMultipleCoins.cs" />
     <Compile Include="Utils\FeatureTour\Tours\TourMonitoringOnlyInstance.cs" />
     <Compile Include="Utils\HashrateFormatter.cs" />
+    <Compile Include="Utils\OpenHardwareMonitor\OpenHardwareMonitor.cs" />
     <Compile Include="Utils\WhatToMine\WhatToMineAPI.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\GettingStartedViewModel.cs" />
