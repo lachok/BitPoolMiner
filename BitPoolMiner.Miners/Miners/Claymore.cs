@@ -49,7 +49,7 @@ namespace BitPoolMiner.Miners
         /// <summary>
         /// Collect stats from EWBF and post to API
         /// </summary>
-        public override async void ReportStatsAsyc()
+        public override async void ReportStatsAsyc(Guid accountId, string workerName)
         {
             try
             {
@@ -61,13 +61,13 @@ namespace BitPoolMiner.Miners
 
                 // Map response to BPM Statistics object
                 MinerMonitorStat minerMonitorStat = new MinerMonitorStat();
-                minerMonitorStat = MapRPCResponse(claymoreTemplate);
+                minerMonitorStat = MapRPCResponse(accountId, workerName, claymoreTemplate);
 
                 if (minerMonitorStat == null)
                     return;
 
                 System.Threading.Thread.Sleep(2000);
-                PostMinerMonitorStat(minerMonitorStat);
+                PostMinerMonitorStat(accountId, workerName, minerMonitorStat);
             }
             catch (Exception e)
             {
@@ -135,15 +135,15 @@ namespace BitPoolMiner.Miners
         /// </summary>
         /// <param name="claymoreTemplate"></param>
         /// <returns></returns>
-        private MinerMonitorStat MapRPCResponse(ClaymoreTemplate claymoreTemplate)
+        private MinerMonitorStat MapRPCResponse(Guid accountId, string workerName, ClaymoreTemplate claymoreTemplate)
         {
             try
             {
                 // Create new Miner monitor stats object
                 MinerMonitorStat minerMonitorStat = new MinerMonitorStat
                 {
-                    AccountGuid = (Guid)Application.Current.Properties["AccountID"],
-                    WorkerName = Application.Current.Properties["WorkerName"].ToString(),
+                    AccountGuid = accountId,
+                    WorkerName = workerName,
                     CoinType = this.CoinType,
                     MinerBaseType = MinerBaseType
                 };
@@ -158,8 +158,8 @@ namespace BitPoolMiner.Miners
                         // Create new GPU monitor stats object and map values
                         GPUMonitorStat gpuMonitorStat = new GPUMonitorStat
                         {
-                            AccountGuid = (Guid)Application.Current.Properties["AccountID"],
-                            WorkerName = Application.Current.Properties["WorkerName"].ToString(),
+                            AccountGuid = accountId,
+                            WorkerName = workerName,
                             CoinType = this.CoinType,
                             GPUID = i,
                             // Returned hashrate is in MH. Format later, return in KH/s same as CCMiner for now

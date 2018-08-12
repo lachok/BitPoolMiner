@@ -537,9 +537,13 @@ namespace BitPoolMiner.ViewModels
         /// <param name="param"></param>
         private void ScanHardware(object param)
         {
+
+            var accountId = (Guid)Application.Current.Properties["AccountID"];
+            var workerName = Application.Current.Properties["WorkerName"].ToString();
+
             // Scan for hardware using Open Harware Monitor
             Utils.OpenHardwareMonitor.OpenHardwareMonitor openHardwareMonitor = new Utils.OpenHardwareMonitor.OpenHardwareMonitor();
-            GPUSettingsList = openHardwareMonitor.ScanHardware();
+            GPUSettingsList = openHardwareMonitor.ScanHardware(accountId, workerName);
 
             // Push GPU settings to the API
             PersistWorkerHardware(null);

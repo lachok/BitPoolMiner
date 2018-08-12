@@ -2078,6 +2078,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BitPoolMiner.Miners\BitPoolMiner.Miners.csproj">
+      <Project>{5b653740-3cad-45f6-bd2b-c2f61f86f0f1}</Project>
+      <Name>BitPoolMiner.Miners</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BitPoolMiner.Models\BitPoolMiner.Models.csproj">
       <Project>{e00c8f4a-5f95-4655-ae3c-aa595dec7854}</Project>
       <Name>BitPoolMiner.Models</Name>

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitPoolMiner.Persistence", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitPoolMiner.Models", "BitPoolMiner.Models\BitPoolMiner.Models.csproj", "{E00C8F4A-5F95-4655-AE3C-AA595DEC7854}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitPoolMiner.Miners", "BitPoolMiner.Miners\BitPoolMiner.Miners.csproj", "{5B653740-3CAD-45F6-BD2B-C2F61F86F0F1}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitPoolMiner.Utils", "BitPoolMiner.Utils\BitPoolMiner.Utils.csproj", "{068F160C-2B49-4656-BAA6-7ED8A763D0D7}"
 EndProject
 Global

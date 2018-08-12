@@ -56,17 +56,17 @@ namespace BitPoolMiner.Miners
 
         #region Monitoring Statistics
 
-        public async override void ReportStatsAsyc()
+        public async override void ReportStatsAsyc(Guid accountId, string workerName)
         {
             try
             {
-                var minerMonitorStat = await GetRPCResponse();
+                var minerMonitorStat = await GetRPCResponse(accountId, workerName);
 
                 if (minerMonitorStat == null)
                     return;
 
                 System.Threading.Thread.Sleep(4000);
-                PostMinerMonitorStat(minerMonitorStat);
+                PostMinerMonitorStat(accountId, workerName, minerMonitorStat);
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@ namespace BitPoolMiner.Miners
             }
         }
 
-        private async Task<MinerMonitorStat> GetRPCResponse()
+        private async Task<MinerMonitorStat> GetRPCResponse(Guid accountId, string workerName)
         {
             MinerMonitorStat minerMonitorStat = new MinerMonitorStat();
             try
@@ -82,8 +82,8 @@ namespace BitPoolMiner.Miners
                 var dictHW = PruvotApi.GetHwInfo(HostName, ApiPort);
                 var dictHist = PruvotApi.GetHistory(HostName, ApiPort);
 
-                minerMonitorStat.AccountGuid = (Guid)Application.Current.Properties["AccountID"];
-                minerMonitorStat.WorkerName = Application.Current.Properties["WorkerName"].ToString();
+                minerMonitorStat.AccountGuid = accountId;
+                minerMonitorStat.WorkerName = workerName;
                 minerMonitorStat.CoinType = CoinType;
                 minerMonitorStat.MinerBaseType = MinerBaseType;
 
@@ -107,8 +107,8 @@ namespace BitPoolMiner.Miners
                     // Create new GPU monitor stats object and map values
                     GPUMonitorStat gpuMonitorStat = new GPUMonitorStat();
 
-                    gpuMonitorStat.AccountGuid = (Guid)Application.Current.Properties["AccountID"];
-                    gpuMonitorStat.WorkerName = Application.Current.Properties["WorkerName"].ToString();
+                    gpuMonitorStat.AccountGuid = accountId;
+                    gpuMonitorStat.WorkerName = workerName;
                     gpuMonitorStat.CoinType = CoinType;
                     gpuMonitorStat.GPUID = Convert.ToInt32(gpuNumber);
                     gpuMonitorStat.HashRate = (Convert.ToDecimal(gpuHash["KHS"]));

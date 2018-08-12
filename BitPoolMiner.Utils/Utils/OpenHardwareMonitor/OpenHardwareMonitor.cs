@@ -10,9 +10,9 @@ using System.Windows;
 
 namespace BitPoolMiner.Utils.OpenHardwareMonitor
 {
-    class OpenHardwareMonitor
+    public class OpenHardwareMonitor
     {
-        public ObservableCollection<GPUSettings> ScanHardware()
+        public ObservableCollection<GPUSettings> ScanHardware(Guid accountId, string workerName)
         {
             ObservableCollection<GPUSettings> gpuSettingsList = new ObservableCollection<GPUSettings>();
 
@@ -31,8 +31,8 @@ namespace BitPoolMiner.Utils.OpenHardwareMonitor
                     {
                         GPUSettings gpuSettings = new GPUSettings();
 
-                        gpuSettings.AccountGuid = (Guid)Application.Current.Properties["AccountID"];
-                        gpuSettings.WorkerName = Application.Current.Properties["WorkerName"].ToString();
+                        gpuSettings.AccountGuid = accountId;
+                        gpuSettings.WorkerName = workerName;
                         gpuSettings.HardwareName = hardwareItem.Name;
                         gpuSettings.EnabledForMining = true;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BitPoolMiner.Miners
 {
@@ -52,11 +53,11 @@ namespace BitPoolMiner.Miners
         /// <summary>
         /// Post the mining stats to the API and website
         /// </summary>
-        public void GetMinerStatsAsync()
+        public void GetMinerStatsAsync(Guid accountId, string workerName)
         {
             foreach (Miner m in Miners)
             {
-                m.ReportStatsAsyc();
+                m.ReportStatsAsyc(accountId, workerName);
             }
         }
     }

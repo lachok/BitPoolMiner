@@ -1,13 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BitPoolMiner.Miners\BitPoolMiner.Miners.csproj" />
+    <PackageReference Include="NLog" Version="4.5.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BitPoolMiner.Models\BitPoolMiner.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BitPoolMiner.Persistence\BitPoolMiner.Persistence.csproj" />
     <ProjectReference Include="..\BitPoolMiner.Utils\BitPoolMiner.Utils.csproj" />
   </ItemGroup>

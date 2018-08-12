@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.5.8" />
+    <PackageReference Include="OpenHardwareMonitor" Version="0.7.1" />
   </ItemGroup>
 
   <ItemGroup>

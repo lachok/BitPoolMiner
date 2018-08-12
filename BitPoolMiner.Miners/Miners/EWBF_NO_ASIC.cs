@@ -49,7 +49,7 @@ namespace BitPoolMiner.Miners
         /// <summary>
         /// Collect stats from EWBF and post to API
         /// </summary>
-        public override async void ReportStatsAsyc()
+        public override async void ReportStatsAsyc(Guid accountId, string workerName)
         {
             try
             {
@@ -61,13 +61,13 @@ namespace BitPoolMiner.Miners
 
                 // Map response to BPM Statistics object
                 MinerMonitorStat minerMonitorStat = new MinerMonitorStat();
-                minerMonitorStat = MapRPCResponse(ewbfTemplate);
+                minerMonitorStat = MapRPCResponse(accountId, workerName, ewbfTemplate);
 
                 if (minerMonitorStat == null)
                     return;
 
                 System.Threading.Thread.Sleep(8000);
-                PostMinerMonitorStat(minerMonitorStat);
+                PostMinerMonitorStat(accountId, workerName, minerMonitorStat);
             }
             catch (Exception e)
             {
@@ -129,14 +129,14 @@ namespace BitPoolMiner.Miners
         /// </summary>
         /// <param name="ewbfTemplate"></param>
         /// <returns></returns>
-        private MinerMonitorStat MapRPCResponse(EWBFTemplate ewbfTemplate)
+        private MinerMonitorStat MapRPCResponse(Guid accountId, string workerName, EWBFTemplate ewbfTemplate)
         {
             try
             {
                 // Create new Miner monitor stats object
                 MinerMonitorStat minerMonitorStat = new MinerMonitorStat();
-                minerMonitorStat.AccountGuid = (Guid)Application.Current.Properties["AccountID"];
-                minerMonitorStat.WorkerName = Application.Current.Properties["WorkerName"].ToString();
+                minerMonitorStat.AccountGuid = accountId;
+                minerMonitorStat.WorkerName = workerName;
                 minerMonitorStat.CoinType = this.CoinType;
                 minerMonitorStat.MinerBaseType = MinerBaseType;
 
@@ -149,8 +149,8 @@ namespace BitPoolMiner.Miners
                         // Create new GPU monitor stats object and map values
                         GPUMonitorStat gpuMonitorStat = new GPUMonitorStat
                         {
-                            AccountGuid = (Guid)Application.Current.Properties["AccountID"],
-                            WorkerName = Application.Current.Properties["WorkerName"].ToString(),
+                            AccountGuid = accountId,
+                            WorkerName = workerName,
                             CoinType = this.CoinType,
                             GPUID = ewbfOBjectTemplate.gpuid,
                             HashRate = ewbfOBjectTemplate.speed_sps,

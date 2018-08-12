@@ -97,16 +97,16 @@ namespace BitPoolMiner.Miners
         /// <summary>
         /// Reports miner statistics back to the website via API. Implemented per miner, should be asynchronous.
         /// </summary>
-        public abstract void ReportStatsAsyc();
+        public abstract void ReportStatsAsyc(Guid accountId, string workerName);
 
         /// <summary>
         /// Helper method to post miner stats back to the website
         /// </summary>
         /// <param name="stats"></param>
-        protected void PostMinerMonitorStat(MinerMonitorStat stats)
+        protected void PostMinerMonitorStat(Guid accountId, string workerName, MinerMonitorStat stats)
         {
             // Use OpenHardwareMonitor to add any missing data if needed
-            stats = SupplementMinerMonitorStatData(stats);
+            stats = SupplementMinerMonitorStatData(accountId, workerName, stats);
 
             // Send data to API
             MinerMonitorStatsAPI minerMonitorStatsAPI = new MinerMonitorStatsAPI();
@@ -117,7 +117,7 @@ namespace BitPoolMiner.Miners
         /// Use OpenHardwareMonitor to add any missing data if needed
         /// </summary>
         /// <param name="stats"></param>
-        private MinerMonitorStat SupplementMinerMonitorStatData(MinerMonitorStat stats)
+        private MinerMonitorStat SupplementMinerMonitorStatData(Guid accountId, string workerName, MinerMonitorStat stats)
         {
             // Check if any data is missing from stats
             if (CheckMinerMonitorStatDataMissing(stats) == true)
@@ -126,7 +126,7 @@ namespace BitPoolMiner.Miners
                 {
                     // Retrive GPU data from OpenHardwareMonitor
                     Utils.OpenHardwareMonitor.OpenHardwareMonitor openHardwareMonitor = new Utils.OpenHardwareMonitor.OpenHardwareMonitor();
-                    ObservableCollection<GPUSettings> gpuSettingsList = openHardwareMonitor.ScanHardware();
+                    ObservableCollection<GPUSettings> gpuSettingsList = openHardwareMonitor.ScanHardware(accountId, workerName);
 
                     // Iterate through each GPUMonitorStat and add missing data
                     foreach (GPUMonitorStat gpuMonitorStat in stats.GPUMonitorStatList)

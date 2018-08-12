@@ -75,7 +75,9 @@ namespace BitPoolMiner.ViewModels
         private async void MinerStatusInsertTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Call miner RPC and post results to API
-            MiningSession.GetMinerStatsAsync();
+            var accountId = (Guid)Application.Current.Properties["AccountID"];
+            var workerName = Application.Current.Properties["WorkerName"].ToString();
+            MiningSession.GetMinerStatsAsync(accountId, workerName);
         }
 
         private bool ValidateStartMining()

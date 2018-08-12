@@ -13,16 +13,17 @@ using BitPoolMiner.Utils;
 namespace BitPoolMiner.Miners
 {
     /// <summary>
-    /// This class is for DTSM miner derived class.
+    /// This class is for EWBF miner derived class.
     /// </summary>
-    public class DSTM : Miner
+    public class EWBF : Miner
     {
-        public DSTM(HardwareType hardwareType, MinerBaseType minerBaseType) : base("DSTM", hardwareType, minerBaseType)
-        {
-            MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "DSTM");
-            MinerFileName = "zm.exe";
 
-            ApiPort = 2222;
+        public EWBF(HardwareType hardwareType, MinerBaseType minerBaseType) : base("EWBF", hardwareType, minerBaseType)
+        {
+            MinerWorkingDirectory = Path.Combine(Utils.Core.GetBaseMinersDir(), "EWBF");
+            MinerFileName = "miner.exe";
+
+            ApiPort = 42000;
             HostName = "127.0.0.1";
         }
 
@@ -48,29 +49,29 @@ namespace BitPoolMiner.Miners
         /// <summary>
         /// Collect stats from EWBF and post to API
         /// </summary>
-        public override async void ReportStatsAsyc()
+        public override async void ReportStatsAsyc(Guid accountId, string workerName)
         {
             try
             {
                 // Call RPC and get response
-                DSTMTemplate dstmTemplate = await GetRPCResponse();
+                EWBFTemplate ewbfTemplate = await GetRPCResponse();
 
-                if (dstmTemplate == null)
+                if (ewbfTemplate == null)
                     return;
 
                 // Map response to BPM Statistics object
                 MinerMonitorStat minerMonitorStat = new MinerMonitorStat();
-                minerMonitorStat = MapRPCResponse(dstmTemplate);
+                minerMonitorStat = MapRPCResponse(accountId, workerName, ewbfTemplate);
 
                 if (minerMonitorStat == null)
                     return;
 
-                System.Threading.Thread.Sleep(6000);
-                PostMinerMonitorStat(minerMonitorStat);
+                System.Threading.Thread.Sleep(8000);
+                PostMinerMonitorStat(accountId, workerName, minerMonitorStat);
             }
             catch (Exception e)
             {
-                NLogProcessing.LogError(e, "Error reporting stats for DSTM");
+                NLogProcessing.LogError(e, "Error reporting stats for EWBF");
             }
         }
 
@@ -78,9 +79,9 @@ namespace BitPoolMiner.Miners
         /// Call RPC and get response
         /// </summary>
         /// <returns></returns>
-        private async Task<DSTMTemplate> GetRPCResponse()
+        private async Task<EWBFTemplate> GetRPCResponse()
         {
-            DSTMTemplate dstmTemplate;
+            EWBFTemplate ewbfTemplate;
             try
             {
                 var clientSocket = new TcpClient();
@@ -98,17 +99,17 @@ namespace BitPoolMiner.Miners
                     string _returndata = System.Text.Encoding.ASCII.GetString(inStream);
                     string jsonData = _returndata.Substring(0, _returndata.LastIndexOf("}") + 1);
 
-                    dstmTemplate = JsonConvert.DeserializeObject<DSTMTemplate>(jsonData);
+                    ewbfTemplate = JsonConvert.DeserializeObject<EWBFTemplate>(jsonData);
 
                     // Close socket
                     clientSocket.Close();
                     clientSocket = null;
 
-                    return dstmTemplate;
+                    return ewbfTemplate;
                 }
                 else
                 {
-                    NLogProcessing.LogInfo($"Could not connect to DSTM miner socket on port {ApiPort}");
+                    NLogProcessing.LogInfo($"Could not connect to EWBF miner socket on port {ApiPort}");
 
                     // Return null object;
                     return null;
@@ -116,7 +117,7 @@ namespace BitPoolMiner.Miners
             }
             catch (Exception e)
             {
-                NLogProcessing.LogError(e, $"Error reading RPC call from DSTM miner on port {ApiPort}");
+                NLogProcessing.LogError(e, $"Error reading RPC call from EWBF miner on port {ApiPort}");
 
                 // Return null object;
                 return null;
@@ -124,44 +125,44 @@ namespace BitPoolMiner.Miners
         }
 
         /// <summary>
-        /// Map DSTM response to BPM statistics objects
+        /// Map EWBF response to BPM statistics objects
         /// </summary>
-        /// <param name="dstmTemplate"></param>
+        /// <param name="ewbfTemplate"></param>
         /// <returns></returns>
-        private MinerMonitorStat MapRPCResponse(DSTMTemplate dstmTemplate)
+        private MinerMonitorStat MapRPCResponse(Guid accountId, string workerName, EWBFTemplate ewbfTemplate)
         {
             try
             {
                 // Create new Miner monitor stats object
                 MinerMonitorStat minerMonitorStat = new MinerMonitorStat();
-                minerMonitorStat.AccountGuid = (Guid)Application.Current.Properties["AccountID"];
-                minerMonitorStat.WorkerName = Application.Current.Properties["WorkerName"].ToString();
+                minerMonitorStat.AccountGuid = accountId;
+                minerMonitorStat.WorkerName = workerName;
                 minerMonitorStat.CoinType = this.CoinType;
                 minerMonitorStat.MinerBaseType = MinerBaseType;
 
-                if (dstmTemplate.result.Count > 0)
+                if (ewbfTemplate.result.Count > 0)
                 {
                     List<GPUMonitorStat> gpuMonitorStatList = new List<GPUMonitorStat>();
 
-                    foreach (DSTMOBjectTemplate dstmOBjectTemplate in dstmTemplate.result)
+                    foreach (EWBFOBjectTemplate ewbfOBjectTemplate in ewbfTemplate.result)
                     {
                         // Create new GPU monitor stats object and map values
                         GPUMonitorStat gpuMonitorStat = new GPUMonitorStat
                         {
-                            AccountGuid = (Guid)Application.Current.Properties["AccountID"],
-                            WorkerName = Application.Current.Properties["WorkerName"].ToString(),
+                            AccountGuid = accountId,
+                            WorkerName = workerName,
                             CoinType = this.CoinType,
-                            GPUID = dstmOBjectTemplate.gpu_id,
-                            HashRate = dstmOBjectTemplate.sol_ps,
+                            GPUID = ewbfOBjectTemplate.gpuid,
+                            HashRate = ewbfOBjectTemplate.speed_sps,
                             FanSpeed = 0,
-                            Temp = (short)dstmOBjectTemplate.temperature,
-                            Power = (short)dstmOBjectTemplate.power_usage,
+                            Temp = (short)ewbfOBjectTemplate.temperature,
+                            Power = (short)ewbfOBjectTemplate.gpu_power_usage,
                             HardwareType = Hardware
                         };
 
                         // Sum up power and hashrate
-                        minerMonitorStat.Power += (short)dstmOBjectTemplate.power_usage;
-                        minerMonitorStat.HashRate += dstmOBjectTemplate.sol_ps;
+                        minerMonitorStat.Power += (short)ewbfOBjectTemplate.gpu_power_usage;
+                        minerMonitorStat.HashRate += ewbfOBjectTemplate.speed_sps;
 
                         // Add GPU stats to list
                         gpuMonitorStatList.Add(gpuMonitorStat);
@@ -175,13 +176,12 @@ namespace BitPoolMiner.Miners
             }
             catch (Exception e)
             {
-                NLogProcessing.LogError(e, "Error mapping RPC Response for DSTM miner");
+                NLogProcessing.LogError(e, "Error mapping RPC Response for EWBF miner");
 
                 return null;
             }
         }
 
         #endregion
-
     }
 }
