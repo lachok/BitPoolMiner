@@ -93,6 +93,19 @@ namespace BitPoolMiner.ViewModels
             }
         }
 
+        /// <summary>
+        /// Current workers fiat currency for conversions
+        /// </summary>
+        public string FiatCurrencySymbol
+        {
+            get
+            {
+                if (Application.Current.Properties["Currency"] == null)
+                    return "";
+                else
+                    return Application.Current.Properties["Currency"].ToString();
+            }
+        }
         #endregion
 
         #region Main Window Menu Worker List Methods
@@ -104,7 +117,7 @@ namespace BitPoolMiner.ViewModels
             {
                 // Load list of account workers
                 MinerMonitorStatsAPI minerMonitorStatsAPI = new MinerMonitorStatsAPI();
-                AccountWorkersList = minerMonitorStatsAPI.GetMinerMonitorStats();
+                AccountWorkersList = minerMonitorStatsAPI.GetMinerMonitorStats(Application.Current.Properties["AccountID"].ToString());
                 OnPropertyChanged("AccountWorkersList");
             }
         }

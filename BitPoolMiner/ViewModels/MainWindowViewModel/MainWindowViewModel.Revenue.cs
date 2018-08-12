@@ -171,7 +171,7 @@ namespace BitPoolMiner.ViewModels
 
                     // Load payment data from the API
                     MinerPaymentsAPI minerPaymentsAPI = new MinerPaymentsAPI();
-                    minerPaymentsList = minerPaymentsAPI.GetMinerPayments();
+                    minerPaymentsList = minerPaymentsAPI.GetMinerPayments(Application.Current.Properties["AccountID"].ToString());
 
                     // Add payment data to list
                     minerPaymentsData.MinerPaymentSummaryList = minerPaymentsList.OrderBy(x => x.CoinType.ToString()).ToList();

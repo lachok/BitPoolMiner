@@ -148,14 +148,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Enums\AlgorithmType.cs" />
-    <Compile Include="Enums\CoinType.cs" />
-    <Compile Include="Enums\Currency.cs" />
-    <Compile Include="Enums\HardwareType.cs" />
-    <Compile Include="Enums\MinerBaseType.cs" />
-    <Compile Include="Enums\Region.cs" />
-    <Compile Include="Formatter\WhatToMineDataFormatter.cs" />
-    <Compile Include="Formatter\MinerMonitorStatsFormatter.cs" />
+    <Compile Include="Converter\WorkerTypeConverter.cs" />
+    <Compile Include="Converter\FiatCurrencyDisplayConverter.cs" />
     <Compile Include="Miners\Ccminer.cs" />
     <Compile Include="Miners\CCMinerForkNanashi.cs" />
     <Compile Include="Miners\Claymore.cs" />
@@ -165,47 +159,12 @@
     <Compile Include="Miners\LyclMiner.cs" />
     <Compile Include="Miners\Miner.cs" />
     <Compile Include="Miners\MinerFactory.cs" />
-    <Compile Include="Models\AccountIdentity.cs" />
     <Compile Include="Miners\MiningSession.cs" />
-    <Compile Include="Models\AccountWallet.cs" />
-    <Compile Include="Models\AccountWorkers.cs" />
-    <Compile Include="Models\CoinMarketCap\CoinMarketCapResponse.cs" />
-    <Compile Include="Models\CoinMiners.cs" />
-    <Compile Include="Models\CryptoCompare\HistoDayResponse.cs" />
-    <Compile Include="Models\GPUMonitorStat.cs" />
-    <Compile Include="Models\GPUSettings.cs" />
-    <Compile Include="Models\MinerConfigRequest.cs" />
-    <Compile Include="Models\MinerConfigResponse.cs" />
-    <Compile Include="Models\MinerMonitorStat.cs" />
-    <Compile Include="Models\MinerPayments\MinerPaymentDetails24Hours.cs" />
-    <Compile Include="Models\MinerPayments\MinerPaymentsData.cs" />
-    <Compile Include="Models\MinerPayments\MinerPaymentsGroupedByDay.cs" />
-    <Compile Include="Models\MinerPayments\MinerPaymentSummary.cs" />
-    <Compile Include="Models\Profitability\ProfitabilityData.cs" />
-    <Compile Include="Models\RPCResponse\ClaymoreTemplate.cs" />
-    <Compile Include="Models\RPCResponse\DSTMTemplate.cs" />
-    <Compile Include="Models\RPCResponse\EWBFTemplate.cs" />
-    <Compile Include="Models\WhatToMine\WhatToMineResponse.cs" />
-    <Compile Include="Models\WhatToMine\WhatToMineData.cs" />
-    <Compile Include="Models\WorkerSettings.cs" />
-    <Compile Include="Persistence\API\AccountWalletAPI.cs" />
-    <Compile Include="Persistence\API\AccountWorkersAPI.cs" />
-    <Compile Include="Persistence\API\GPUSettingsAPI.cs" />
-    <Compile Include="Persistence\API\MinerConfigStringAPI.cs" />
-    <Compile Include="Persistence\API\MinerPaymentsAPI.cs" />
-    <Compile Include="Persistence\API\MinerMonitorStatsAPI.cs" />
-    <Compile Include="Persistence\API\AccountIdentityAPI.cs" />
-    <Compile Include="Persistence\API\Base\APIBase.cs" />
-    <Compile Include="Persistence\API\Base\APIConstants.cs" />
-    <Compile Include="Persistence\FileSystem\WorkerSettingsFile.cs" />
-    <Compile Include="Persistence\FileSystem\AccountIdentityFile.cs" />
-    <Compile Include="Persistence\FileSystem\Base\FileConstants.cs" />
     <Compile Include="Process\BPMProcess.cs" />
     <Compile Include="Utils\ChartUtils\PaymentChartDataBackFill.cs" />
     <Compile Include="Utils\ChartUtils\WorkerChartDataBackFill.cs" />
     <Compile Include="Utils\CoinMarketCap\CoinMarketCapAPI.cs" />
     <Compile Include="Utils\CommandConverter\Converter.cs" />
-    <Compile Include="Utils\Core.cs" />
     <Compile Include="Utils\CryptoCompare\CryptoCompareAPI.cs" />
     <Compile Include="Utils\FeatureTour\FeatureTourElementID.cs" />
     <Compile Include="Utils\FeatureTour\Tours\TourAdditionalWorkerSetup.cs" />
@@ -213,7 +172,6 @@
     <Compile Include="Utils\FeatureTour\Tours\TourMineMultipleCoins.cs" />
     <Compile Include="Utils\FeatureTour\Tours\TourMonitoringOnlyInstance.cs" />
     <Compile Include="Utils\HashrateFormatter.cs" />
-    <Compile Include="Utils\NLogProcessing.cs" />
     <Compile Include="Utils\OpenHardwareMonitor\OpenHardwareMonitor.cs" />
     <Compile Include="Utils\WhatToMine\WhatToMineAPI.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
@@ -2119,6 +2077,19 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BitPoolMiner.Models\BitPoolMiner.Models.csproj">
+      <Project>{e00c8f4a-5f95-4655-ae3c-aa595dec7854}</Project>
+      <Name>BitPoolMiner.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoolMiner.Persistence\BitPoolMiner.Persistence.csproj">
+      <Project>{2944b84f-6bbc-407d-b88b-14128c9eec25}</Project>
+      <Name>BitPoolMiner.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoolMiner.Utils\BitPoolMiner.Utils.csproj">
+      <Project>{068f160c-2b49-4656-baa6-7ed8a763d0d7}</Project>
+      <Name>BitPoolMiner.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

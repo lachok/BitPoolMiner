@@ -257,7 +257,7 @@ namespace BitPoolMiner.ViewModels
                 {
                     // Load list of miner monitor stats
                     MinerMonitorStatsAPI minerMonitorStatsAPI = new MinerMonitorStatsAPI();
-                    MinerMonitorStatList24Hour = minerMonitorStatsAPI.GetMinerMonitorStats24Hour();
+                    MinerMonitorStatList24Hour = minerMonitorStatsAPI.GetMinerMonitorStats24Hour(Application.Current.Properties["AccountID"].ToString());
 
                     // LineChart data
                     ChartValuesHashRate = new ChartValues<DateTimePoint>();
@@ -327,7 +327,7 @@ namespace BitPoolMiner.ViewModels
                 {
                     // Load list of miner monitor stats
                     MinerMonitorStatsAPI minerMonitorStatsAPI = new MinerMonitorStatsAPI();
-                    ObservableCollection<MinerMonitorStat> MinerMonitorStatList = minerMonitorStatsAPI.GetMinerMonitorStats();
+                    ObservableCollection<MinerMonitorStat> MinerMonitorStatList = minerMonitorStatsAPI.GetMinerMonitorStats(Application.Current.Properties["AccountID"].ToString());
 
                     // Filter list by worker
                     MinerMonitorStat = MinerMonitorStatList.Where(x => x.WorkerName == WorkerName && x.CoinType == CoinType).OrderBy(y => y.Created).FirstOrDefault();

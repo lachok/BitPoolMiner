@@ -29,19 +29,5 @@ namespace BitPoolMiner.Models.MinerPayments
         /// </summary>
         public List<MinerPaymentSummary> MinerPaymentSummaryList { get; set; }
 
-        /// <summary>
-        /// Current workers fiat currency for conversions
-        /// </summary>
-        public string FiatCurrencySymbol
-        {
-            get
-            {
-                if (Application.Current.Properties["Currency"] == null)
-                    return "";
-                else
-                    return Application.Current.Properties["Currency"].ToString();
-            }
-        }
-
     }
 }

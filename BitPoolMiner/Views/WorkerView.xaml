@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:converter="clr-namespace:BitPoolMiner.Converter"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
@@ -12,6 +13,7 @@
 
     <UserControl.Resources>
 
+        <converter:WorkerTypeConverter x:Key="WorkerTypeConverter"/>
         <Style TargetType="lvc:Separator">
             <Setter Property="Stroke" Value="#444444"></Setter>
             <!-- Disable X axis gridlines -->
@@ -105,7 +107,7 @@
                             <Label FontWeight="Bold" Style="{StaticResource labelStyleWhite}" Content="{Binding Status, UpdateSourceTrigger=PropertyChanged}"></Label>
                         </Border>
                         <Border BorderBrush="#2c97de" BorderThickness="1" Padding="5 0 5 3" Margin="2 2 2 0">
-                            <Label Foreground="#2c97de" FontSize="12" Padding="0" Content="{Binding LocalWorker, UpdateSourceTrigger=PropertyChanged}"></Label>
+                            <Label Foreground="#2c97de" FontSize="12" Padding="0" Content="{Binding WorkerName, Converter={StaticResource WorkerTypeConverter}, UpdateSourceTrigger=PropertyChanged}"></Label>
                         </Border>
                         <Border BorderBrush="#2c97de" BorderThickness="1" Padding="5 0 5 3" Margin="2 2 2 0">
                             <Label Foreground="#2c97de" FontSize="12" Padding="0" Content="{Binding MinerBaseType, UpdateSourceTrigger=PropertyChanged}"></Label>

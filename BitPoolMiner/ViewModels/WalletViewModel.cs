@@ -57,11 +57,12 @@ namespace BitPoolMiner.ViewModels
         {
             try
             {
-                if (Application.Current.Properties["AccountID"] != null)
+                var accountId = Application.Current.Properties["AccountID"];
+                if (accountId != null)
                 {
                     // Load list of wallet addresses account
                     AccountWalletAPI accountWalletAPI = new AccountWalletAPI();
-                    AccountWalletList = accountWalletAPI.GetAccountWalletList();
+                    AccountWalletList = accountWalletAPI.GetAccountWalletList(accountId.ToString());
 
                     // Notify UI of change
                     OnPropertyChanged("AccountWalletList");

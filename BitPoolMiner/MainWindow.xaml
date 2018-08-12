@@ -536,7 +536,7 @@
                 <StackPanel Orientation="Vertical" Margin="20 0 0 0" DataContext="{Binding Source={StaticResource MainWindowViewModel}, Path=MinerPaymentsData, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal">
                         <Label Style="{StaticResource labelStyleFooterGrey}">Revenue Last 24h</Label>
-                        <Label Style="{StaticResource labelStyleFooterGrey}" Content="{Binding FiatCurrencySymbol}"></Label>
+                        <Label Style="{StaticResource labelStyleFooterGrey}" Content="{Binding Source={StaticResource MainWindowViewModel}, Path=FiatCurrencySymbol}"></Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Style="{StaticResource labelStyleFooterGrey}">Revenue Last 24h</Label>
@@ -552,7 +552,7 @@
                 <StackPanel Orientation="Vertical" Margin="40 0 0 0" DataContext="{Binding Source={StaticResource MainWindowViewModel}, Path=MinerPaymentsData, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal">
                         <Label Style="{StaticResource labelStyleFooterGrey}">Rough Forecast Last 24h</Label>
-                        <Label Style="{StaticResource labelStyleFooterGrey}" Content="{Binding FiatCurrencySymbol}"></Label>
+                        <Label Style="{StaticResource labelStyleFooterGrey}" Content="{Binding  Source={StaticResource MainWindowViewModel}, Path=FiatCurrencySymbol}"></Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Style="{StaticResource labelStyleFooterGrey}">Rough Forecast Last 24h</Label>

@@ -86,19 +86,5 @@ namespace BitPoolMiner.Models.WhatToMine
         /// <summary>
         /// Get the Coin Logo file location
         public string CoinLogo { get; set; }
-
-        /// <summary>
-        /// Current workers fiat currency for conversions
-        /// </summary>
-        public string FiatCurrencySymbol
-        {
-            get
-            {
-                if (Application.Current.Properties["Currency"] == null)
-                    return "";
-                else
-                    return Application.Current.Properties["Currency"].ToString();
-            }
-        }
     }
 }

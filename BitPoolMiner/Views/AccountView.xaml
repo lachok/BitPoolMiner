@@ -8,6 +8,8 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:featureTouring="clr-namespace:ThinkSharp.FeatureTouring;assembly=ThinkSharp.FeatureTour"
+             xmlns:converter="clr-namespace:BitPoolMiner.Converter"
+             xmlns:enums="clr-namespace:BitPoolMiner.Enums;assembly=BitPoolMiner.Models"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
@@ -17,17 +19,19 @@
     <!--Define Views-->
     <UserControl.Resources>
 
+        <converter:WorkerTypeConverter x:Key="WorkerTypeConverter"/>
+
         <!-- Wire up enum data source for CoinType -->
-        <ObjectDataProvider x:Key="EnumDataProvider"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="ct:CoinType"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumDataProvider"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="enums:CoinType"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
 
         <!-- Wire up enum data source for MinerBaseType -->
-        <ObjectDataProvider x:Key="EnumDataProviderMinerBaseType"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="ct:MinerBaseType"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumDataProviderMinerBaseType"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="enums:MinerBaseType"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
 
         <!-- Wire up enum data source for Region -->
-        <ObjectDataProvider x:Key="EnumDataProviderRegion"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="ct:Region"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumDataProviderRegion"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="enums:Region"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
 
         <!-- Wire up enum data source for Currency -->
-        <ObjectDataProvider x:Key="EnumDataProviderCurrency"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="ct:CurrencyList"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumDataProviderCurrency"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="enums:CurrencyList"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
 
         <!-- Style - Label White Title -->
         <Style x:Key = "labelStyleFooterWhiteTitle" TargetType = "Label">
@@ -608,7 +612,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding WorkerName, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="Worker Name" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                         <DataGridTextColumn Binding="{Binding Status, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="Status" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
-                        <DataGridTextColumn Binding="{Binding LocalWorker, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="Local Worker" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
+                        <DataGridTextColumn Binding="{Binding WorkerName, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource WorkerTypeConverter}}" Header="Local Worker" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                         <DataGridTextColumn Binding="{Binding MinutesSinceLastMonitored, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="Last Seen (Mins)" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>

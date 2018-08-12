@@ -204,7 +204,7 @@ namespace BitPoolMiner.ViewModels
                     // Load list of miner monitor stats
                     List<MinerMonitorStat> minerMonitorStatList = new List<MinerMonitorStat>();
                     MinerMonitorStatsAPI minerMonitorStatsAPI = new MinerMonitorStatsAPI();
-                    minerMonitorStatList = minerMonitorStatsAPI.GetMinerMonitorStats().ToList();
+                    minerMonitorStatList = minerMonitorStatsAPI.GetMinerMonitorStats(Application.Current.Properties["AccountID"].ToString()).ToList();
                     GetMinerMonitoringSumGrouped(minerMonitorStatList);
                     GetWorkersOnlineGrouped(minerMonitorStatList);
                     GetWorkersOfflineGrouped(minerMonitorStatList);

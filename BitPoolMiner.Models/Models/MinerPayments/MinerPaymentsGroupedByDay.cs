@@ -56,20 +56,6 @@ namespace BitPoolMiner.Models.MinerPayments
         public string CoinLogo { get; set; }
 
         /// <summary>
-        /// Current workers fiat currency for conversions
-        /// </summary>
-        public string FiatCurrencySymbol
-        {
-            get
-            {
-                if (Application.Current.Properties["Currency"] == null)
-                    return "";
-                else
-                    return Application.Current.Properties["Currency"].ToString();
-            }
-        }
-
-        /// <summary>
         /// Display date without timestamp
         /// </summary>
         public string DisplayPaymentDate
@@ -88,17 +74,6 @@ namespace BitPoolMiner.Models.MinerPayments
             get
             {
                 return Math.Round(PaymentAmount, 2).ToString();
-            }
-        }
-
-        /// <summary>
-        /// Display  formatted payment amount in fiat
-        /// </summary>
-        public string DisplayPaymentAmountFiat
-        {
-            get
-            {
-                return string.Format("{0} {1}", Math.Round(PaymentAmountFiat, 2), FiatCurrencySymbol);
             }
         }
 

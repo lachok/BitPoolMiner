@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Drawing;
-using System.Windows;
 
 namespace BitPoolMiner.Models
 {
@@ -51,25 +49,6 @@ namespace BitPoolMiner.Models
                 {
                     return "never run";
                 }
-            }
-        }
-
-        /// <summary>
-        /// Is Miner Local or Remote
-        /// </summary>
-        [JsonIgnore]
-        public string LocalWorker
-        {
-            get
-            {
-                if (Application.Current.Properties["WorkerName"] == null)
-                    return "unknown";
-
-                if (Application.Current.Properties["WorkerName"].ToString() == this.WorkerName)
-                    return "local";
-
-                else
-                    return "remote";
             }
         }
 

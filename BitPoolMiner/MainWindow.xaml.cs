@@ -110,7 +110,7 @@ namespace BitPoolMiner
         {
             try
             {
-                if ((bool)Application.Current.Properties["AutoStartMining"])
+                if ((bool)Application.Current.Properties[" AutoStartMining"])
                 {
                     ButtonStartMining_Click(this, new RoutedEventArgs());
                 }

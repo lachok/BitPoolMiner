@@ -221,7 +221,7 @@ namespace BitPoolMiner.ViewModels
                 {
                     // Load list of account workers
                     AccountWorkersAPI accountWorkersAPI = new AccountWorkersAPI();
-                    AccountWorkersList = accountWorkersAPI.GetAccountWorkers();
+                    AccountWorkersList = accountWorkersAPI.GetAccountWorkers(Application.Current.Properties["AccountID"].ToString());
 
                     // Notify UI of change
                     OnPropertyChanged("AccountWorkersList");
@@ -520,7 +520,9 @@ namespace BitPoolMiner.ViewModels
             {
                 // Write GPU Settings to API
                 GPUSettingsAPI gpuSettingsAPI = new GPUSettingsAPI();
-                GPUSettingsList = gpuSettingsAPI.GetGPUSettings();
+                var accountId = Application.Current.Properties["AccountID"].ToString();
+                var workerName = Application.Current.Properties["WorkerName"].ToString();
+                GPUSettingsList = gpuSettingsAPI.GetGPUSettings(accountId, workerName);
             }
             catch (Exception e)
             {

@@ -80,7 +80,7 @@ namespace BitPoolMiner.ViewModels
                 {
                     // Load list of miner monitor stats
                     MinerMonitorStatsAPI minerMonitorStatsAPI = new MinerMonitorStatsAPI();
-                    MinerMonitorStatList = minerMonitorStatsAPI.GetMinerMonitorStats();
+                    MinerMonitorStatList = minerMonitorStatsAPI.GetMinerMonitorStats(Application.Current.Properties["AccountID"].ToString());
 
                     // Convert GPU List into data tables for UI binding
                     foreach(MinerMonitorStat minerMonitorStat in minerMonitorStatList)

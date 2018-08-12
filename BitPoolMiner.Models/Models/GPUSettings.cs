@@ -1,5 +1,4 @@
 ﻿using BitPoolMiner.Enums;
-using BitPoolMiner.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +7,7 @@ namespace BitPoolMiner.Models
     /// <summary>
     /// Represents an individual GPU for a miner
     /// </summary>
-    public class GPUSettings : ViewModelBase
+    public class GPUSettings
     {
         /// <summary>
         /// Unique account identifier
@@ -58,9 +57,6 @@ namespace BitPoolMiner.Models
                 if (minerBaseTypeList.Count > 0)
                 {
                     MinerBaseType = minerBaseTypeList[0];
-                    OnPropertyChanged("CoinSelectedForMining");
-                    OnPropertyChanged("MinerBaseTypeList");
-                    OnPropertyChanged("MinerBaseType");
                 }
             }
         }
@@ -87,7 +83,6 @@ namespace BitPoolMiner.Models
             set
             {
                 minerBaseTypeList = SetMinerBaseType();
-                OnPropertyChanged();
             }
 
         }

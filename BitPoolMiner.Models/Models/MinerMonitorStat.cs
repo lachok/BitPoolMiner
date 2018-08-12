@@ -81,24 +81,6 @@ namespace BitPoolMiner.Models
         /// <summary>        /// Current GPU Power        /// </summary>        public string DisplayPower { get; set; }
 
         /// <summary>
-        /// Is Miner Local or Remote
-        /// </summary>
-        public string LocalWorker
-        {
-            get
-            {
-                if (Application.Current.Properties["WorkerName"] == null)
-                    return "unknown";
-
-                if (Application.Current.Properties["WorkerName"].ToString() == this.WorkerName)
-                    return "local";
-
-                else
-                    return "remote";
-            }
-        }
-
-        /// <summary>
         /// Status of worker
         /// </summary>
         [JsonIgnore]

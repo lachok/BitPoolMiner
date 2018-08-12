@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ct="clr-namespace:BitPoolMiner.Enums"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:BitPoolMiner.Converter"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
@@ -14,6 +15,7 @@
     <!--Define Views-->
     <UserControl.Resources>
 
+        <converter:WorkerTypeConverter x:Key="WorkerTypeConverter"/>
         <!-- Wire up enum data source for CoinType -->
         <ObjectDataProvider x:Key="EnumDataProvider"                         MethodName="GetValues"                         ObjectType="{x:Type System:Enum}">            <ObjectDataProvider.MethodParameters>                <x:Type TypeName="ct:CoinType"/>            </ObjectDataProvider.MethodParameters>        </ObjectDataProvider>
 
@@ -228,7 +230,7 @@
                                             <Label Foreground="#9f9f9f" Padding="2" FontSize="12" Content="{Binding MinerBaseType}"/>
                                         </Border>
                                         <Border BorderThickness="1" BorderBrush="#9f9f9f" Padding="2" Margin="4 2 2 2" HorizontalAlignment="Left">
-                                            <Label Foreground="#9f9f9f" Padding="2" FontSize="12" Content="{Binding LocalWorker}"/>
+                                            <Label Foreground="#9f9f9f" Padding="2" FontSize="12" Content="{Binding WorkerName, Converter={StaticResource WorkerTypeConverter}}"/>
                                         </Border>
 
                                     </StackPanel>
@@ -352,7 +354,7 @@
                                         <Label Foreground="#9f9f9f" Padding="2" FontSize="10" Content="{Binding Status}"/>
                                     </Border>
                                     <Border BorderThickness="1" BorderBrush="#9f9f9f" Padding="2" Margin="4 2 2 2" HorizontalAlignment="Left">
-                                        <Label Foreground="#9f9f9f" Padding="2" FontSize="10" Content="{Binding LocalWorker}"/>
+                                        <Label Foreground="#9f9f9f" Padding="2" FontSize="10" Content="{Binding WorkerName, Converter={StaticResource WorkerTypeConverter}}"/>
                                     </Border>
                                     <Border BorderThickness="1" BorderBrush="#9f9f9f" Padding="2" Margin="4 2 2 2" HorizontalAlignment="Left">
                                         <Label Foreground="#9f9f9f" Padding="2" FontSize="10" Content="{Binding DisplayMinutesSinceLastMonitored}"/>

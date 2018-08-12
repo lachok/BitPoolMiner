@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BitPoolMiner.Views"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:converter="clr-namespace:BitPoolMiner.Converter"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
@@ -13,6 +14,7 @@
 
     <UserControl.Resources>
 
+        <converter:FiatCurrencyDisplayConverter x:Key="FiatCurrencyDisplayConverter"/>
         <Style x:Key="DataGridRowHeaderStyleGPU" TargetType="{x:Type DataGridRowHeader}"  >
             <Setter Property="Visibility" Value="Hidden" />
             <Setter Property="Background" Value="#2d2d2d" />
@@ -270,7 +272,7 @@
                     <DataGridTextColumn Binding="{Binding CoinType}" Header="CoinType" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                     <DataGridTextColumn Binding="{Binding DisplayPaymentDate}" Header="Date" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                     <DataGridTextColumn Binding="{Binding DisplayPaymentAmount}" Header="Coins" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
-                    <DataGridTextColumn Binding="{Binding DisplayPaymentAmountFiat}" Header="Fiat" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
+                    <DataGridTextColumn Binding="{Binding PaymentAmountFiat, Converter={StaticResource FiatCurrencyDisplayConverter}}" Header="Fiat" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                     <DataGridTextColumn Binding="{Binding FiatExchangeRate}" Header="Ex Rate" IsReadOnly="True" CellStyle="{StaticResource DataGridCellStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
